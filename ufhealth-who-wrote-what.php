@@ -26,4 +26,6 @@ function ufhealth_who_wrote_what_loader() {
 	// Remember the text domain.
 	load_plugin_textdomain( 'ufhealth-who-wrote-what', false, dirname( dirname( __FILE__ ) ) . '/languages' );
 
+	require( dirname( __FILE__ ) . '/includes/who-wrote-what.php' );
+
 }
