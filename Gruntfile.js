@@ -10,84 +10,6 @@ module.exports = function (grunt) {
 		{
 
 			/**
-			 * Processes and compresses JavaScript.
-			 */
-			uglify: {
-
-				production: {
-
-					options: {
-						beautify:         false,
-						preserveComments: false,
-						mangle:           {
-							reserved: ['jQuery']
-						}
-					},
-
-					files: {
-						'assets/js/ufhealth-who-wrote-what.min.js': [
-							'assets/js/src/ufhealth-who-wrote-what.js'
-						]
-					}
-				}
-			},
-
-			/**
-			 * Auto-prefix CSS Elements after SASS is processed.
-			 */
-			autoprefixer: {
-
-				options: {
-					browsers: ['last 5 versions'],
-					map:      true
-				},
-
-				files: {
-					expand:  true,
-					flatten: true,
-					src:     ['assets/css/ufhealth-who-wrote-what.css'],
-					dest:    'assets/css'
-				}
-			},
-
-			/**
-			 * Minify CSS after prefixes are added
-			 */
-			cssmin: {
-
-				target: {
-
-					files: [{
-						expand: true,
-						cwd:    'assets/css',
-						src:    ['ufhealth-who-wrote-what.css'],
-						dest:   'assets/css',
-						ext:    '.min.css'
-					}]
-
-				}
-			},
-
-			/**
-			 * Process SASS
-			 */
-			sass: {
-
-				dist: {
-
-					options: {
-						style:     'expanded',
-						sourceMap: true,
-						noCache:   true
-					},
-
-					files: {
-						'assets/css/ufhealth-who-wrote-what.css': 'assets/css/scss/ufhealth-who-wrote-what.scss'
-					}
-				}
-			},
-
-			/**
 			 * Update translation file.
 			 */
 			makepot: {
@@ -116,52 +38,11 @@ module.exports = function (grunt) {
 					colors:     true
 
 				}
-			},
-
-			/**
-			 * Clean up the JavaScript
-			 */
-			jshint: {
-				options: {
-					jshintrc: true
-				},
-				all:     ['assets/js/src/ufhealth-who-wrote-what.js']
-			},
-
-			/**
-			 * Watch scripts and styles for changes
-			 */
-			watch: {
-
-				options: {
-					livereload: true
-				},
-
-				scripts: {
-
-					files: [
-						'assets/js/src/*'
-					],
-
-					tasks: ['uglify:production']
-
-				},
-
-				styles: {
-
-					files: [
-						'assets/css/scss/*'
-					],
-
-					tasks: ['sass', 'autoprefixer', 'cssmin']
-
-				}
 			}
 		}
 	);
 
 	// A very basic default task.
-	grunt.registerTask('default', ['phpunit', 'jshint', 'uglify:production', 'sass', 'autoprefixer', 'cssmin', 'makepot']);
-	grunt.registerTask('dev', ['default', 'watch']);
+	grunt.registerTask('default', ['phpunit', 'makepot']);
 
 };
