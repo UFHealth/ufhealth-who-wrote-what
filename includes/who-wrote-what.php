@@ -58,6 +58,37 @@ add_filter( 'manage_users_columns', __NAMESPACE__ . '\filter_manage_users_column
  */
 function filter_manage_users_custom_column( $output, $column_name, $user_id ) {
 
+	$args = array(
+		'public' => true,
+	);
+
+	$post_types = get_post_types( $args, 'objects' );
+	$post_count = 0;
+
+	foreach ( $post_types as $post_type ) {
+
+		if ( 'posts' !== $column_name && $post_type->name === $column_name ) {
+
+			$post_counts = count_many_users_posts( array( $user_id ), $post_type->name );
+			$post_count  = $post_counts[ $user_id ];
+			$output      = '';
+
+			if ( $post_count > 0 ) {
+
+				$output .= '<a href="edit.php?post_type=' . esc_attr( $post_type->name ) . '&author=' . absint( $user_id ) . '" class="edit">';
+				$output .= '<span aria-hidden="true">' . absint( $post_count ) . '</span>';
+				// translators: 1 the number of posts of this post type by the author 2. the post type.
+				$output .= '<span class="screen-reader-text">' . sprintf( _n( '%1$d %2$s by this author', '%1$d %2$s by this author', $post_count, 'ufhealth-who-wrote-what' ), number_format_i18n( $post_count ), $post_type->name ) . '</span>';
+				$output .= '</a>';
+
+			} else {
+
+				$output .= 0;
+
+			}
+		}
+	}
+
 	return $output;
 
 }
