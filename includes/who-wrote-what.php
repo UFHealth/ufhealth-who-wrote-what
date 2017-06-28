@@ -42,3 +42,24 @@ function filter_manage_users_columns( $columns ) {
 }
 
 add_filter( 'manage_users_columns', __NAMESPACE__ . '\filter_manage_users_columns' );
+
+/**
+ * Filter manage_users_custom_column
+ *
+ * Filters the display output of custom columns in the Users list table.
+ *
+ * @since 1.0
+ *
+ * @param string $output Custom column output. Default empty.
+ * @param string $column_name Column name.
+ * @param int    $user_id ID of the currently-listed user.
+ *
+ * @return string The output to populate the user table cell.
+ */
+function filter_manage_users_custom_column( $output, $column_name, $user_id ) {
+
+	return $output;
+
+}
+
+add_filter( 'manage_users_custom_column', __NAMESPACE__ . '\filter_manage_users_custom_column', 10, 3 );
