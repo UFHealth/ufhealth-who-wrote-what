@@ -26,28 +26,30 @@ class Admin_Tests extends Base\TestCase {
 	 * @var array
 	 */
 	protected $testFiles = array(
-		'cwho-wrote-what.php',
+		'class-who-wrote-what.php',
 	);
 
 	/**
 	 * Test module constructor.
 	 */
-	public function test_setup() {
+	public function test_constructor() {
 
 		// Setup.
-		\WP_Mock::wpFunction( 'get_option', array(
-			'args'   => 'better_yourls',
-			'times'  => 2,
-			'return' => array(),
-		) );
+		$plugin = new Base\Who_Wrote_What();
 
-		\WP_Mock::expectActionAdded( 'admin_enqueue_scripts', array( $admin, 'action_admin_enqueue_scripts' ) );
-		\WP_Mock::expectActionAdded( 'admin_init', array( $admin, 'action_admin_init' ) );
-		\WP_Mock::expectActionAdded( 'admin_menu', array( $admin, 'action_admin_menu' ) );
-		\WP_Mock::expectFilterAdded( 'plugin_action_links', array( $admin, 'filter_plugin_action_links' ), 10, 2 );
+		\WP_Mock::expectFilterAdded( 'manage_users_columns', array( $plugin, 'filter_manage_users_columns' ) );
+		\WP_Mock::expectFilterAdded(
+			'manage_users_custom_column',
+			array(
+				$plugin,
+				'filter_manage_users_custom_column',
+			),
+			10,
+			3
+		);
 
 		// Act.
-		$admin->__construct();
+		$plugin->__construct();
 
 		// Verify.
 		$this->assertConditionsMet();
