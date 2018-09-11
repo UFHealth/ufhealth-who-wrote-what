@@ -3,7 +3,7 @@
  * Plugin Name: UF Health Who Wrote What
  * Plugin URI: https://ufhealth.org/
  * Description: Allows admins to see what a user has written by content type in the users table.
- * Version: 1.0
+ * Version: 1.1
  * Text Domain: ufhealth-who-wrote-what
  * Domain Path: /lang
  * Author: Chris Wiegman
@@ -13,7 +13,7 @@
  * @package UFHealth\who_wrote_what
  */
 
-define( 'UFHEALTH_WHO_WROTE_WHAT_VERSION', '1.0' );
+define( 'UFHEALTH_WHO_WROTE_WHAT_VERSION', '1.1' );
 define( 'UFHEALTH_WHO_WROTE_WHAT_URL', plugin_dir_url( __FILE__ ) );
 
 add_action( 'plugins_loaded', 'ufhealth_who_wrote_what_loader' );
