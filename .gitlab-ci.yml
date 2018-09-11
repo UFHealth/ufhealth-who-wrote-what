@@ -34,10 +34,6 @@ build_assets:
     paths:
       - vendor/
       - languages/
-  cache:
-      paths:
-        - node_modules/
-        - vendor/
 
 # Test PHP 7.2
 test:7.2:
