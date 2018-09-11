@@ -22,27 +22,11 @@ module.exports = function (grunt) {
 						potFilename: 'ufhealth-who-wrote-what.pot'
 					}
 				}
-			},
-
-			phpunit: {
-
-				classes: {
-					dir: 'tests/'
-				},
-
-				options: {
-
-					bin:        './vendor/bin/phpunit',
-					testSuffix: 'Tests.php',
-					bootstrap:  'bootstrap.php',
-					colors:     true
-
-				}
 			}
 		}
 	);
 
 	// A very basic default task.
-	grunt.registerTask('default', ['phpunit', 'makepot']);
+	grunt.registerTask('default', ['makepot']);
 
 };
